@@ -1,0 +1,35 @@
+.bounty {
+    border: 1px solid black;
+    border-radius: 15px;
+    margin: 10px;
+    text-align: center;
+    vertical-align: center;
+    background-color: white;
+    width: 50%;
+}
+
+.isAlive {
+    padding: 10px;
+}
+
+.isDead {
+    padding: 10px;
+    background-image: url("https://www.onlygfx.com/wp-content/uploads/2017/07/red-paint-brush-stroke-10-1024x198.png");
+    background-size: cover;
+    background-position: center center;
+}
+
+.editButton {
+    margin: 5px;
+    font-size: large;
+}
+
+.deleteButton {
+    margin: 5px;
+    font-size: large;
+}
+
+.closeButton {
+    margin: 5px;
+    font-size: large;
+}
