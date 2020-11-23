@@ -16,7 +16,7 @@ creatorRouter.get("/", (req, res, next) => {
 })
 
 //Get One
-creatorRouter.get("/:creatorId", (req, res, next) => {
+creatorRouter.get("/creator/:creatorId", (req, res, next) => {
     Creator.findById(req.params.creatorId, (err, foundItem) => {
         if(err) {
             res.status(500)
@@ -24,6 +24,22 @@ creatorRouter.get("/:creatorId", (req, res, next) => {
         }
         return res.status(200).send(foundItem)
     })
+})
+
+//Get Creators by Search Term
+creatorRouter.get("/search", (req, res, next) => {
+    const {name} = req.query
+    const pattern = new RegExp(name)
+    Creator.find(
+        {name: {$regex: pattern, $options: "i"}}, 
+        (err, creators) => {
+            if(err) {
+                res.status(500)
+                return next(err)
+            }
+            return res.status(200).send(creators)
+        }
+    )
 })
 
 
