@@ -24,6 +24,7 @@ app.use(morgan("dev"))
 
 //Routes
 app.use("/inventory", require("./routes/inventoryRouter.js"))
+app.use("/creators", require("./routes/creatorRouter.js"))
 
 
 //Error Handling

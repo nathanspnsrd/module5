@@ -14,6 +14,15 @@ const inventorySchema = new Schema({
     amount: {
         type: Number,
         required: true
+    },
+    timesPurchased: {
+        type: Number,
+        default: 0
+    },
+    creator: {
+        type: Schema.Types.ObjectId,
+        ref: "Createor",
+        required: true
     }
 })
 

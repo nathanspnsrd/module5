@@ -4,13 +4,15 @@ import "./addBountyForm.css"
 
 export default function AddBountyFrom(props) {
     const {firstName, lastName, isAlive, type, bountyAmount, submit, btnText, _id} = props
-    const initInputs = {firstName: firstName || "", lastName: lastName || "", isAlive: isAlive || "true", type: type || "", bountyAmount: bountyAmount || ""}
+    const initInputs = {firstName: firstName || "", lastName: lastName || "", isAlive: isAlive === undefined ? true : isAlive, type: type || "", bountyAmount: bountyAmount || ""}
     const [inputs, setInputs] = useState(initInputs)
 
     function handleChange(e) {
-        const {name, value} = e.target
+        const {name, type} = e.target
+        const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value
         setInputs(prevInputs => ({...prevInputs, [name]: value, }))
     }
+
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -47,11 +49,10 @@ export default function AddBountyFrom(props) {
                 />
                 <input 
                     className="inputItem" 
-                    type="text" 
+                    type="checkbox" 
                     name="isAlive" 
-                    value={inputs.isAlive} 
+                    checked={inputs.isAlive} 
                     onChange={handleChange} 
-                    placeholder="true or false"
                 />
                 <input 
                     className="inputItem" 

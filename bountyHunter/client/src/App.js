@@ -35,7 +35,7 @@ export default function App() {
             .catch(err => console.log(err))
     }
 
-    //Handles Put    
+    //Edits the Bounty   
     function editBounty(updates, bountyId) {
         axios.put(`/bounties/${bountyId}`, updates)
             .then(res => {

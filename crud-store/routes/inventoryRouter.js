@@ -26,9 +26,21 @@ inventoryRouter.get("/:inventoryId", (req, res, next) => {
     })
 })
 
+//Get By Creator
+inventoryRouter.get("/:creatorId", (req, res, next) => {
+    Inventory.find({ creator: req.params.creatorId }, (err, inventory) => {
+        if(err) {
+            res.status(500)
+            return next(err)
+        }
+        return res.status(200).send(inventory)
+    })
+})
+
 
 //Post One
-inventoryRouter.post("/", (req, res, next) => {
+inventoryRouter.post("/:creatorId", (req, res, next) => {
+    req.body.creator = req.params.creatorId
     const newItem = new Inventory(req.body)
     newItem.save((err, savedItem) => {
         if(err) {
