@@ -4,7 +4,7 @@ import "./addBountyForm.css"
 
 export default function AddBountyFrom(props) {
     const {firstName, lastName, isAlive, type, bountyAmount, submit, btnText, _id} = props
-    const initInputs = {firstName: firstName || "", lastName: lastName || "", isAlive: isAlive || true, type: type || "", bountyAmount: bountyAmount || ""}
+    const initInputs = {firstName: firstName || "", lastName: lastName || "", isAlive: isAlive || "true", type: type || "", bountyAmount: bountyAmount || ""}
     const [inputs, setInputs] = useState(initInputs)
 
     function handleChange(e) {
@@ -17,7 +17,6 @@ export default function AddBountyFrom(props) {
         submit(inputs, _id)
         setInputs(initInputs)
     }
-
 
     return (
         <div>
@@ -48,7 +47,7 @@ export default function AddBountyFrom(props) {
                 />
                 <input 
                     className="inputItem" 
-                    type="booleen" 
+                    type="text" 
                     name="isAlive" 
                     value={inputs.isAlive} 
                     onChange={handleChange} 

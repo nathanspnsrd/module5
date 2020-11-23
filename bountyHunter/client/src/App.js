@@ -6,15 +6,18 @@ import AddBountyForm from "./components/AddBountyForm.js"
 
 import "./app.css"
 
+
 export default function App() {
     const [bounties, setBounties] = useState([])
 
+    //Handles Get
     function getBounties() {
         axios.get("/bounties")
             .then(res => setBounties(res.data))
-            .catch(err => console.log(err))
+            .catch(err => console.log(err.response.data.errMessage))
     }
 
+    //Handles Post    
     function addBounty(newBounty) {
         axios.post("/bounties", newBounty)
             .then(res => {
@@ -23,6 +26,7 @@ export default function App() {
             .catch(err => console.log(err))
     }
 
+    //Handles Delete    
     function deleteBounty(bountyId) {
         axios.delete(`/bounties/${bountyId}`)
             .then(res => {
@@ -31,6 +35,7 @@ export default function App() {
             .catch(err => console.log(err))
     }
 
+    //Handles Put    
     function editBounty(updates, bountyId) {
         axios.put(`/bounties/${bountyId}`, updates)
             .then(res => {
@@ -39,6 +44,18 @@ export default function App() {
             .catch(err => console.log(err))
     }
 
+    //Handles Get by type
+    function handleFilter(e) {
+        if(e.target.value === "reset") {
+            getBounties()
+        } else {
+            axios.get(`/bounties/search/type?type=${e.target.value}`)
+                .then(res => setBounties(res.data))
+                .catch(err => console.log(err))
+        }
+    }
+
+    //Renders all data on initial load
     useEffect(() => {
         getBounties()
     }, [])
@@ -50,6 +67,14 @@ export default function App() {
                 submit = {addBounty}
                 btnText = "Add Bounty"
             />
+
+            <h4>Filter by Type</h4>
+            <select onChange={handleFilter} className="filter-form">
+                <option value="reset">View All</option>
+                <option value="Jedi">Jedi</option>
+                <option value="Sith">Sith</option>
+            </select>
+
             {
                 bounties.map(bounty => 
                     <Bounty 

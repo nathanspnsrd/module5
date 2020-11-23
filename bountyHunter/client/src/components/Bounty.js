@@ -10,7 +10,7 @@ export default function Bounty(props) {
 
     return (
         <div className="bounty">
-            {   isAlive 
+            {   isAlive === true
                 ?
                 <div className="isAlive">
                     { !editToggle ?
